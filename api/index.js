@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5050;
 const app = express();
 
 // middleware 
-app.use(express.json())
+app.use(express.json());
 
 // connect to database
 mongoose.connect(process.env.MONGO_URI)
@@ -27,4 +27,13 @@ app.listen(PORT, () => console.log(`Server listening on port: ${PORT}!`));
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 
-
+// middleware to handle errors
+app.use((err,req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  return res.status(statusCode).json({
+    success: false,
+    error: message,
+    statusCode
+  });
+});
