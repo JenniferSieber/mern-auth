@@ -49,6 +49,7 @@ export default function SignIn() {
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
@@ -74,15 +75,18 @@ export default function SignIn() {
         </button>
         <OAuth />
       </form>
+
       <div className="flex gap-2 mt-5">
         <p>Need to setup an account?</p>
         <Link to="/sign-up">
           <span className="text-blue-500">Sign Up</span>
         </Link>
       </div>
+
       <p className="text-red-700 mt-5">
         {error ? error.message || "Something went wrong, Try again!" : ""}
       </p>
+      
     </div>
   );
 }
