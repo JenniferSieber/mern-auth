@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
@@ -12,6 +13,7 @@ const app = express();
 
 // Server Middleware
 app.use(express.json());
+app.use(cors())
 
 // Connect to database
 mongoose
@@ -20,7 +22,7 @@ mongoose
     console.log("Connected to MongoDB");
   })
   .catch((err) => console.log(err));
-
+``
 // Server listening
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}!`));
 
