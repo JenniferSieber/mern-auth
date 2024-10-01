@@ -50,6 +50,7 @@ export default function SignIn() {
           placeholder="Email"
           id="email"
           className="bg-slate-100 p-3 rounded-lg"
+          autoComplete="email"
           onChange={handleChange}
         />
         <input
@@ -57,6 +58,7 @@ export default function SignIn() {
           placeholder="Password"
           id="password"
           className="bg-slate-100 p-3 rounded-lg"
+          autoComplete="password"
           onChange={handleChange}
         />
         <button
