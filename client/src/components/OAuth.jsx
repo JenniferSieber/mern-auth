@@ -29,9 +29,7 @@ export default function OAuth() {
       });
 
       const data = await res.json();
-      // create logic to check if data.email already in the database
-      // msg client that their account has already been established
-      console.log(data.email);
+      // console.log(data.email);
      
       dispatch(signInSuccess(data));
       navigate("/");

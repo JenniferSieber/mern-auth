@@ -35,7 +35,7 @@ export default function SignIn() {
         dispatch(signInFailure(data));
         return;
       }
-      // add logic to check if email already exists in database msg client if so
+      
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
