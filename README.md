@@ -1,4 +1,4 @@
-#Auth App MERN
+# Auth App MERN
 # Frontend: 
 Vite React App with JavaScript SWC, TailwindCSS, Redux, Google Firebase
 
