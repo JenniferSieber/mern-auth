@@ -5,6 +5,7 @@ import { app } from '../firebase';
 import { signInSuccess } from '../redux/user/userSlice';
 
 export default function OAuth() {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,7 +16,6 @@ export default function OAuth() {
       const auth = getAuth(app);
       
       const result = await signInWithPopup(auth, provider);
-      // console.log(result);
       const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
@@ -27,8 +27,12 @@ export default function OAuth() {
           photo: result.user.photoURL,
         }),
       });
+
       const data = await res.json();
-      console.log(data);
+      // create logic to check if data.email already in the database
+      // msg client that their account has already been established
+      console.log(data.email);
+     
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
