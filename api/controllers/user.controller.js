@@ -4,14 +4,14 @@ import { errorHandler } from "../utils/error.js";
 
 export const test = (req, res) => {
   res.json({
-    message: "API is working",
+    message: "API is working!",
   });
 };
 
 // Update user
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id) {
-    return next(errorHandler(401, 'You can update only your account!'));
+    return next(errorHandler(401, "You can update only your account!"));
   }
   try {
     if (req.body.password) {
@@ -39,5 +39,13 @@ export const updateUser = async (req, res, next) => {
 
 // Delete user
 export const deleteUser = async (req, res, next) => {
-  console.log('delete user')
-}
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, "You are not authorized to delete this account!"));
+  }
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json("User has been deleted...");
+  } catch (error) {
+    next(error);
+  }
+};

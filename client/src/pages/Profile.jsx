@@ -25,7 +25,6 @@ export default function Profile() {
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  console.log(app);
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
   useEffect(() => {
@@ -118,12 +117,10 @@ export default function Profile() {
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
         />
-        {/* 
-          firebase storage rules:  
-          allow read; 
-          allow write: if 
-            request.resource.contentType.matches('image/.*') &&  // Only image files
-            request.resource.size < 2 * 1024 * 1024   // File size under 2 MB    */}
+        {/* firebase storage rules:  
+            allow write: if 
+      	        request.resource.contentType.matches('image/.*') &&  // Only image files
+      	        request.resource.size < 2 * 1024 * 1024   // File size under 2 MB          */}
         <img
           src={formData.profilePicture || currentUser.profilePicture}
           alt="profile"
@@ -133,7 +130,7 @@ export default function Profile() {
         <p className="text-sm self-center">
           {imageError ? (
             <span className="text-red-700">
-              Error uploading image (file must be image only -size less than 2 MB)
+              Error uploading image (file size must be less than 2 MB)
             </span>
           ) : imagePercent > 0 && imagePercent < 100 ? (
             <span className="text-slate-700">{`Uploading: ${imagePercent} %`}</span>
@@ -183,7 +180,7 @@ export default function Profile() {
       </div>
       <p className="text-red-700 mt-5">{error && "Something went wrong!"}</p>
       <p className="text-green-700 mt-5">
-        {updateSuccess && "Profile updated successfully!"}
+        {updateSuccess && "User is updated successfully!"}
       </p>
     </div>
   );
